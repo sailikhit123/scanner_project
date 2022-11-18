@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:syncfusion_flutter_datagrid_export/export.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'continuousscanner.dart';
 
 void main() => runApp(MyApp());
 
@@ -75,7 +79,7 @@ class _MyAppState extends State<MyApp> {
                 child: Image.asset(
                   'assets/images/logo.png',
                   fit: BoxFit.contain,
-                  height: 240,
+                  height: 235,
                 ),
               ),
               SizedBox(height: 10),
@@ -108,7 +112,7 @@ class _MyAppState extends State<MyApp> {
                             Row(
                               children: [
                                 Container(
-                                  width: 120,
+                                  width: 111,
                                   padding: EdgeInsets.all(15),
                                   decoration: BoxDecoration(
                                     color: Colors.black,
@@ -133,7 +137,7 @@ class _MyAppState extends State<MyApp> {
                                   ),
                                 ),
                                 Container(
-                                  width: 120,
+                                  width: 111,
                                   padding: EdgeInsets.all(15),
                                   decoration: BoxDecoration(
                                     color: Colors.black,
@@ -154,7 +158,7 @@ class _MyAppState extends State<MyApp> {
                                   ),
                                 ),
                                 Container(
-                                  width: 120,
+                                  width: 111,
                                   padding: EdgeInsets.all(15),
                                   decoration: BoxDecoration(
                                     color: Colors.black,
@@ -191,7 +195,7 @@ class _MyAppState extends State<MyApp> {
                   Row(
                     children: [
                       Container(
-                        width: 120,
+                        width: 111,
                         padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
                           color: Colors.black,
@@ -214,13 +218,13 @@ class _MyAppState extends State<MyApp> {
                         ),
                       ),
                       Container(
-                        width: 120,
+                        width: 111,
                         padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
                           color: Colors.black,
                         ),
                         child: InkWell(
-                          onTap: () => startBarcodeScanStream(),
+                          onTap: () => QRViewExample(),
                           child: Column(children: [
                             Image.asset('assets/images/qrlogo.png', height: 75),
                             Center(
@@ -234,7 +238,7 @@ class _MyAppState extends State<MyApp> {
                         ),
                       ),
                       Container(
-                        width: 120,
+                        width: 111,
                         padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
                           color: Colors.black,
