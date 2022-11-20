@@ -37,6 +37,7 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   syncfusion_flutter_datagrid_export: any
   qr_code_scanner: ^1.0.1
+  google_fonts:
 
 
 dev_dependencies:
@@ -69,7 +70,8 @@ flutter:
     - assets/images/dualscan.png
     - assets/images/multiscan.png
     - assets/images/singlescan.png
-
+    - assets/images/contiscanx1.png
+    - assets/images/infinitescan.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

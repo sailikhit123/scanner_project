@@ -37,10 +37,15 @@ class _QRViewExampleState extends State<QRViewExample> {
           Expanded(
             flex: 1,
             child: FittedBox(
-              fit: BoxFit.contain,
+              fit: BoxFit.scaleDown,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
+                  if (result != null)
+                    Text(
+                        'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
+                  else
+                    const Text('Scan a code'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,7 +90,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        margin: const EdgeInsets.all(8),
+                        margin: const EdgeInsets.all(14),
                         child: ElevatedButton(
                           onPressed: () async {
                             await controller?.pauseCamera();
@@ -95,7 +100,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.all(8),
+                        margin: const EdgeInsets.all(2),
                         child: ElevatedButton(
                           onPressed: () async {
                             await controller?.resumeCamera();
@@ -116,13 +121,10 @@ class _QRViewExampleState extends State<QRViewExample> {
   }
 
   Widget _buildQrView(BuildContext context) {
-    // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-    var scanArea = (MediaQuery.of(context).size.width < 400 ||
-            MediaQuery.of(context).size.height < 400)
-        ? 150.0
-        : 300.0;
-    // To ensure the Scanner view is properly sizes after rotation
-    // we need to listen for Flutter SizeChanged notification and update controller
+    var scanArea = (MediaQuery.of(context).size.width < 700 ||
+            MediaQuery.of(context).size.height < 700)
+        ? 250.0
+        : 400.0;
     return QRView(
       key: qrKey,
       onQRViewCreated: _onQRViewCreated,
