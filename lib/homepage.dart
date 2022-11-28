@@ -1,11 +1,16 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables
-// ignore: sized_box_for_whitespace
+
+// ignore_for_file: prefer_const_constructors, unused_import
+
 import 'package:flutter/material.dart';
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sg_labs_scanner/multiscantile.dart';
-import 'singlescantile.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -33,13 +38,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  Future<void> startBarcodeScanStream() async {
-    String contiScan;
-
-    FlutterBarcodeScanner.getBarcodeStreamReceiver(
-            '#ff6666', 'Cancel', false, ScanMode.DEFAULT)!
-        .listen((contiScan) => tags.add(contiScan));
-  }
 
   Future<void> scanBarcodeNormal() async {
     String barcodeScanRes;
@@ -82,19 +80,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.aod), label: 'Scan Result'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.apps), label: 'Multi-Scan Output')
-        ],
-        currentIndex: _selectedIndex,
-        onTap: onTapped,
-        selectedItemColor: Color.fromARGB(255, 90, 225, 255),
-        unselectedItemColor: Colors.grey,
-      ),
       body: PageView(
         controller: pageController,
         children: [
@@ -117,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       SizedBox(height: 40),
                       Row(
                         children: [
-                          SizedBox(width: 15),
+                          SizedBox(width: 30),
                           Container(
                             width: 111,
                             padding: EdgeInsets.all(15),
@@ -200,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 40),
                 Row(
                   children: [
-                    SizedBox(width: 65),
+                    SizedBox(width: 85),
                     Container(
                       width: 111,
                       padding: EdgeInsets.all(15),
@@ -227,20 +212,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     MultiQrTile()
                   ],
                 ),
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Container(
+                    
+                    child: Text('Scan result : $_scanBarcode\n',
+                              style: GoogleFonts.notoSans(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),),
+                )
               ],
             ),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Center(
-                  child: Text('Scan result : $_scanBarcode\n',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                ),
-              )
-            ],
-          ),
+
           Container(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -248,17 +232,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Expanded(
                     child: Center(
-                      child: Text('Multi-Scan Output Here',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
+                      child: Text(
+                        'Barcode Type:')
                     ),
-                  ),
-                  RaisedButton(
-                    color: Color.fromARGB(255, 30, 177, 221),
-                    shape: StadiumBorder(),
-                    onPressed: (() {
-                    }),
-                    child: Text('Export To Excel'),
                   ),
                   SizedBox(width: 30, height: 40),
                 ],
@@ -269,3 +245,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
